@@ -1,9 +1,14 @@
 package com.example.demo.personel.resource;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.Selector;
+import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.personel.model.personel;
 import com.example.demo.personel.repository.PersonelRepository;
- 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +32,7 @@ public class personelController {
 	@Autowired
 	private PersonelRepository repository;
 
+	@WriteOperation
 	@GetMapping("/getall")
 	public List<personel> getAll() {
 		return repository.findAll();
@@ -54,11 +59,14 @@ public class personelController {
 		repository.deleteById(id);
 	}
 
+	@GetMapping("/getpersonel/{id}")
+	public personel findCustomerById(@PathVariable String id) {
+		return repository.findCustomerById(id);
+	}
 
-    @GetMapping("/getpersonel/{id}")
-    public personel findCustomerById(@PathVariable String id) {
-        return repository.findCustomerById(id);
-    }
-
+	@RequestMapping("/")
+	public String index() {
+		return "denemetest";
+	}
 
 }
