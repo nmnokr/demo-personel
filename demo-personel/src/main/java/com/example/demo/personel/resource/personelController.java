@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,17 +24,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.personel.model.personel;
 import com.example.demo.personel.repository.PersonelRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+ 
 @RestController
+
+@Api(value = "Test Rest Api", description = "Test Rest Service")
+
+@ApiResponses(value = { @ApiResponse(code = 200, message = "istek basarili oldu."),
+		@ApiResponse(code = 401, message = "istek kullanıcı dogrulaması veya mesaj gerektiriyor."),
+		@ApiResponse(code = 403, message = "erişim yetki srounu"),
+		@ApiResponse(code = 404, message = "adres bulunamadı") })
 public class personelController {
-	private final Logger LOG = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private PersonelRepository repository;
 
 	@WriteOperation
 	@GetMapping("/getall")
+	@ApiOperation(value = "Test api operation")
 	public List<personel> getAll() {
 		return repository.findAll();
 	}
@@ -64,9 +75,18 @@ public class personelController {
 		return repository.findCustomerById(id);
 	}
 
-	@RequestMapping("/")
+	@RequestMapping("/deneme")
 	public String index() {
 		return "denemetest";
+	}
+
+	@PutMapping("/employmentTerminationDate/{date}")
+	personel replaceEmployee(@RequestBody personel newEmployee, @PathVariable String date) {
+
+		newEmployee.setEmploymentTerminationDate(date);
+
+		return repository.save(newEmployee);
+
 	}
 
 }

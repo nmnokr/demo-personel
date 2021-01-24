@@ -3,25 +3,46 @@ package com.example.demo.personel.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "deneme")
-public class personel {
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@Document(collection = "deneme")
+@ApiModel(value = "User Api model documentation", description = "Model")
+
+public class personel {
+	@ApiModelProperty(value = "22")
 	private int age;
+	@ApiModelProperty(value = "0")
 	private int childCount;
+	@ApiModelProperty(value = "Turkey")
 	private String citizenship;
+	@ApiModelProperty(value = "testfotolink")
 	private String employeePhoto;
+	@ApiModelProperty(value = "01.01.2020")
 	private String employmentStartDate;
+	@ApiModelProperty(value = "01.01.2021")
 	private String employmentTerminationDate;
+	@ApiModelProperty(value = "Numan")
 	private String firstName;
+	@ApiModelProperty(value = "Male")
 	private String gender;
+	@ApiModelProperty(value = "01.01.2020")
 	private String hireDate;
+	@ApiModelProperty(value = "OKUR")
 	private String lastName;
+	@ApiModelProperty(value = "SINGLE")
 	private String maritalStatus;
+	@ApiModelProperty(value = "Computer Engineer")
 	private String profession;
+	@ApiModelProperty(value = "false")
 	private Boolean retired;
+	@ApiModelProperty(value = "22")
 	private int salary;
+	@ApiModelProperty(value = "3700")
 	private String salaryCurrency;
+	@ApiModelProperty(value = "TL")
 	private String salaryPeriod;
+ 
 	@Id
 	private String id;
 
@@ -33,10 +54,12 @@ public class personel {
 		this.id = id;
 	}
 
+	
+	
 	public int getAge() {
 		return age;
 	}
-
+	
 	public void setAge(int age) {
 		this.age = age;
 	}
