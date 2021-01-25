@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
  
 @RestController
-
+@RequestMapping("/test")
 @Api(value = "Test Rest Api", description = "Test Rest Service")
 
 @ApiResponses(value = { @ApiResponse(code = 200, message = "istek basarili oldu."),

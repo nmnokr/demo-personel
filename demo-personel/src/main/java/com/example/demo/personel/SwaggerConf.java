@@ -20,8 +20,8 @@ public class SwaggerConf {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.example.demo.personel"))
-				.paths(PathSelectors.regex("/.*")).build();
+				.apis(RequestHandlerSelectors.basePackage("com.example.demo.personel.resource"))
+				.paths(PathSelectors.regex("/.*")).build().apiInfo(apiEndPointsInfo());
 	}
 
 	private ApiInfo apiEndPointsInfo() {
