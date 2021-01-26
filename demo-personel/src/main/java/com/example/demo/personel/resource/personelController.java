@@ -1,5 +1,6 @@
 package com.example.demo.personel.resource;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.personel.SystemLogger;
 import com.example.demo.personel.model.personel;
 import com.example.demo.personel.repository.PersonelRepository;
 
@@ -45,7 +47,8 @@ public class personelController {
 	@WriteOperation
 	@GetMapping("/getall")
 	@ApiOperation(value = "Test api operation")
-	public List<personel> getAll() {
+	public List<personel> getAll() throws IOException {
+		SystemLogger.getInstance().write("deneme");
 		return repository.findAll();
 	}
 
